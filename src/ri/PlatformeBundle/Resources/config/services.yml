@@ -1,0 +1,10 @@
+services:
+     ri_platforme.antispam:
+         class: ri\PlatformeBundle\Antispam\riAntispam
+         arguments: ["@Mailer", "%locale%",50]
+
+     ri_platform.doctrine.notification:
+         class: ri\PlatformeBundle\DoctrineListener\ApplicationNotification
+         arguments: ["@mailer"]
+         tags:
+             - { name: doctrine.event_listener, event: postPersist }

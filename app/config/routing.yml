@@ -1,0 +1,5 @@
+
+# le prifixe pour ne pas repeter platforme dans tt les url
+ri_platform:
+    resource: "@riPlatformeBundle/Resources/config/routing.yml" 
+    prefix:   /platform

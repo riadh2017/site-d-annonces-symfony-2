@@ -1,0 +1,98 @@
+{# src/ri/PlatformeBundle/Resources/view/Advert/view.html.twig #}
+{% extends "riPlatformeBundle::layout.html.twig" %}
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  {% endblock %}
+
+
+{% block title %}
+  Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+
+
+{% block ocplatform_body %}
+
+
+{% for advert in listApplication  %}
+  <h2>{{ advert.getTitle()}}</h2>
+
+  <i>Par {{ advert.getAuthor() }}, le {{ advert.getDate()|date('d/m/Y') }}</i>
+
+  <div class="well">
+    {{ advert.getContent() }}
+   On vérifie qu'une image soit bien associée à l'annonce 
+{% if advert.image is not null %}
+  <img src="{{ advert.Image.url }}" alt="{{ advert.image.alt }}"> 
+{% endif %}
+
+
+
+  </div>
+
+<div>
+{% if  listApplication is not null %}
+  <h3>les condidatures sont :</h3>
+  <table border="1">    
+    <tr><td>Nom </td> <td> Message</spam></td><td >Date postulé</td></tr>
+    <tbody>
+      <tr>
+    {% for application in listApplication %}
+      <td>{{ application.author }} </td><td> {{ application.content }}</td>><td> {{ application.date|date('d/m/Y')}}</td> </tr>
+       {% endfor %}
+    
+    </tbody>
+</table>
+ 
+{% endif %}
+</div>
+<br>
+  {% endfor %}
+
+{#
+  <h3> Cette annonce est parue dans les catégories suivantes :</h3>
+  
+    {% for categorie in listecategory  %}
+     {{dump(categorie)}}
+     {{categorie.Categories.collection.name}}
+    {% endfor %}
+ }
+ }
+ }
+  {% endfor %}
+
+
+<label>Les competances requises: </label>  
+<ul class="nav nav-pills nav-stacked">
+  {% for advert in advertskill %}
+    <li>        {{ advert.skill.Name }}  : {{ advert.level }}</li>
+  {% endfor %}
+</ul>
+#}
+
+
+  <p>
+    <a href="" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à la liste
+    </a>
+    <a href="" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Modifier l'annonce
+    </a>
+    <a href="" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Supprimer l'annonce
+    </a>
+  </p>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}

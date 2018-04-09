@@ -1,0 +1,29 @@
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+ri_platform_home:
+    path:      /{page}
+    defaults:  { _controller: riPlatformeBundle:Advert:index, page: 1 }
+    requirements:
+        page: \d*
+
+ri_platform_view:
+    path:      /advert/{id}
+    defaults:  { _controller: riPlatformeBundle:Advert:view }
+    requirements:
+        id: \d+
+
+ri_platform_add:
+    path:      /add
+    defaults:  { _controller: riPlatformeBundle:Advert:add }
+
+ri_platform_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: riPlatformeBundle:Advert:edit }
+    requirements:
+        id: \d+
+
+ri_platform_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: riPlatformeBundle:Advert:delete }
+    requirements:
+        id: \d+
