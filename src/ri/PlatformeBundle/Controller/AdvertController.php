@@ -24,20 +24,20 @@ public function indexAction($page)
   {
         $nbPerPage = 3;
 
-     $em = $this->getDoctrine()->getManager();
-       $repository=$em->getRepository('riPlatformeBundle:Advert');
+     $listAdverts = $this
+     ->getDoctrine()
+     ->getManager()
+     ->getRepository('riPlatformeBundle:Advert')
+     ->getAdvertWithApplications( $page,$nbPerPage)
 
-       $listAdverts=$repository->getAdvertWithApplications( $page,$nbPerPage);
-           $nbPages = ceil(count($listAdverts)/$nbPerPage);
+     ;
 
+      $nbPages = ceil(count($listAdverts)/$nbPerPage);
 
-
-
-    // Et modifiez le 2nd argument pour injecter notre liste
     return $this->render('riPlatformeBundle:Advert:index.html.twig', array(
       'listAdverts' => $listAdverts,
-      'nbPages'=>$nbPages,
-      'page'=>$page,
+      'nbPages'     => $nbPages,
+      'page'        => $page,
     ));
   }
 

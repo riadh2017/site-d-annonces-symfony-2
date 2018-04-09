@@ -18,8 +18,11 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 	{
       $qb=$this
       ->createQueryBuilder('a')
-      ->leftjoin('a.applications','app')
-      ->addSelect('app')
+      ->leftjoin('a.image','i')
+      ->addSelect('i')
+      ->leftjoin('a.categories','c')
+      ->addSelect('c')
+      ->orderBy('a.date', 'DESC')
       ->getquery()
       ;
        $qb
