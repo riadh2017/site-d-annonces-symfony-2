@@ -35,7 +35,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
       
 	}
    
-   public function getAdverts($limit)
+   public function getAdvertsMenu($limit)
 	{
       $qb=$this
       ->createQueryBuilder('a')

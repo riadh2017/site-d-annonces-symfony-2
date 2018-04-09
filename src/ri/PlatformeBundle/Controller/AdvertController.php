@@ -191,7 +191,7 @@ public function menuAction()
       $em = $this->getDoctrine()->getManager();
        $repository=$em->getRepository('riPlatformeBundle:Advert');
 
-       $listAdverts=$repository->getAdverts($limit);
+       $listAdverts=$repository->getAdvertsMenu($limit);
 
     return $this->render('riPlatformeBundle:Advert:menu.html.twig', array(
     
