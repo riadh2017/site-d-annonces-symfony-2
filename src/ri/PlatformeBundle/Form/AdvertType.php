@@ -23,12 +23,13 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 $builder
-      ->add('date'   ,DateType::class)
+      ->add('date'   ,DateType::class,['label'=>'date creation'])
       ->add('title' ,TextType::class )
       ->add('content'  ,TextareaType::class )
       ->add('author' , TextType::class)
       ->add('published' ,CheckboxType::class)
       ->add('save',SubmitType::class )
+      //->setAction("home/test")
     ;
     }
      

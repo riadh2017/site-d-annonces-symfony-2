@@ -74,10 +74,18 @@ public function indexAction($page)
 
     $form=$this->createForm(AdvertType::class,$advert);
 
-   $f=$form->createView();
+  $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->flush();
+
+        return $this->redirectToRoute('ri_platform_view', array('id' => $advert->getId()));
+    }
 
     return $this->render('riPlatformeBundle:Advert:add.html.twig' , array(
-      'form' => $f,
+      'form' => $form->createView(),
     ));
   }
   
