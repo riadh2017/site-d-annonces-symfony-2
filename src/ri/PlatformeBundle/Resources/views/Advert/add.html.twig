@@ -1,15 +1,20 @@
-{# src/ri/PlatformeBundle/Resources/views/Advert/add.html.twig #}
+{# src/ri/PlatformeBundle/Resources/views/Advert/add.html.twig 
+
+	{{ include("riPlatformeBundle:Advert:form.html.twig") }}   {{ form(form) }}#}
 
 {% extends "riPlatformeBundle::layout.html.twig" %}
 
 
 {% block body%}
   <h2>Ajouter une annonce</h2>
-
-  {{ include("riPlatformeBundle:Advert:form.html.twig") }}
-{{dump(liste)}}
-  {% if advert.image is not null %}
-  <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
-{% endif %}
+<h3>Formulaire d'annonce</h3>
+<div class="well">
+  
+	 {{ form_start(form) }}
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+  
+</div>
+  
 
 {% endblock %}

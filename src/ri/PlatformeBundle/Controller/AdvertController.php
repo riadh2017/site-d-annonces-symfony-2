@@ -15,6 +15,9 @@ use ri\PlatformeBundle\Entity\Advert;
 use ri\PlatformeBundle\Entity\Image;
 use ri\PlatformeBundle\Entity\Application;
 use ri\PlatformeBundle\Entity\AdvertSkill;
+use ri\PlatformeBundle\Form\AdvertType;
+
+
 
 
 class AdvertController extends Controller
@@ -46,21 +49,14 @@ public function indexAction($page)
   public function viewAction($id)
   {
     
-
-   
-  
        $em = $this->getDoctrine()->getManager();
        $repository=$em->getRepository('riPlatformeBundle:Advert');
 
        $listApplication=$repository->getAdvertWithApplication($id);
        //$listecategory=$repository->getAdvertWithcategory(array('Graphisme','Intégration'));
-
         //$listAdvertSkills = $em->getRepository('riPlatformeBundle:AdvertSkill')->getAdvertWithSkill($id);
-
- 
      //Le render ne change pas, on passait avant un tableau, maintenant un objet
     return $this->render('riPlatformeBundle:Advert:view.html.twig', array(
-   
        //'listecategory'=>$listecategory,
       'listApplication'=>$listApplication
       //'listAdvertSkills'=>$listAdvertSkills
@@ -72,75 +68,19 @@ public function indexAction($page)
    
   public function addAction(Request $request)
   {
-    // Création de l'entité Advert
+   
+    // On crée un objet Advert
     $advert = new Advert();
-    $advert->setTitle('Recherche développeur Symfony2.');
-    $advert->setAuthor('Alexandre');
-    $advert->setContent("Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…");
 
-    // Création de l'entité Image
-    $image = new Image();
-    $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
-    $image->setAlt('Job de rêve');
+    $form=$this->createForm(AdvertType::class,$advert);
 
-    // On lie l'image à l'annonce
-    $advert->setImage($image);
+   $f=$form->createView();
 
-   // creation de l'entite application
-    $app1 = new Application();
-    $app2 = new Application();
-
-    $app1->setAuthor('riadh');
-    $app1->setContent('je pose ma candidature');
-
-    $app2->setAuthor('ali');
-    $app2->setContent('je pose ma 1er candidature');
-
-    $app1->setAdvert($advert);
-    $app2->setAdvert($advert);
-
-    // On récupère l'EntityManager
-    $em = $this->getDoctrine()->getManager();
-
-    // recuperation des l'entites categorys
-     $listecategory=$em->getRepository('riPlatformeBundle:Category')->findAll();
-
-    foreach ($listecategory as $cat) {
-      $advert->addCategory($cat);
-    }
-
-   // recuperation des l'entites skill
-     $listeSkill=$em->getRepository('riPlatformeBundle:Skill')->findAll();
-
-     foreach ($listeSkill as $skill) {
-     $advertSkill = new AdvertSkill();
-
-     $advertSkill->setAdvert($advert);
-     $advertSkill->setSkill($skill);
-     $advertSkill->setLevel('expert');
-
-      $em->persist($advertSkill);
-    }
-
-    // Étape 1 : On « persiste » l'entité
-    $em->persist($advert);
-    $em->persist($app1);
-    $em->persist($app2);
-
-
-
-    // Étape 1 bis : si on n'avait pas défini le cascade={"persist"},
-    // on devrait persister à la main l'entité $image
-    // $em->persist($image);
-
-    // Étape 2 : On déclenche l'enregistrement
-    $em->flush();
-
-
- // Si on n'est pas en POST, alors on affiche le formulaire  
-   // return $this->render('riPlatformeBundle:Advert:add.html.twig');
-    return $this->render('riPlatformeBundle:Advert:add.html.twig', array('advert' => $advert,'liste'=>$listeSkill ));
+    return $this->render('riPlatformeBundle:Advert:add.html.twig' , array(
+      'form' => $f,
+    ));
   }
+  
     
 
 
