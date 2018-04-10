@@ -71,7 +71,7 @@ public function indexAction($page)
    
     // On crée un objet Advert
     $advert = new Advert();
-
+    $advert->setDate(new \Datetime());
     $form=$this->createForm(AdvertType::class,$advert);
 
   $form->handleRequest($request);
@@ -79,6 +79,7 @@ public function indexAction($page)
     if ($form->isSubmitted() && $form->isValid()) {
         $em = $this->getDoctrine()->getManager();
         $em->persist($advert);
+        $em->persist($advert->getImage());
         $em->flush();
 
         return $this->redirectToRoute('ri_platform_view', array('id' => $advert->getId()));
@@ -98,31 +99,16 @@ public function indexAction($page)
   public function editAction($id, Request $request)
   {
 
-    
-    $advert = array(
-      'title'   => 'Recherche développpeur Symfony2',
-      'id'      => $id,
-      'author'  => 'Alexandre',
-      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-      'date'    => new \Datetime()
-    );
+     $em = $this->getDoctrine()->getManager();
+     $advert =$em->getRepository("riPlatformeBundle:Advert")->find($id);
+    $form=$this->createForm(AdvertType::class,$advert);
 
     return $this->render('riPlatformeBundle:Advert:edit.html.twig', array(
-      'advert' => $advert
+      'form' => $form->createView(),
+      'advert'=>$advert
     ));
   
-    // Ici, on récupérera l'annonce correspondante à $id
-
-  //   // Même mécanisme que pour l'ajout
-  //   if ($request->isMethod('POST')) {
-  //     $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
-
-  //     return $this->redirectToRoute('ri_platform_view', array('id' => 5));
-  //   }
-
-  //   return $this->render('riPlatformeBundle:Advert:edit.html.twig');
-  // }
-
+   
   // public function deleteAction($id)
   // {
   //   // Ici, on récupérera l'annonce correspondant à $id

@@ -28,6 +28,7 @@ $builder
       ->add('content'  ,TextareaType::class )
       ->add('author' , TextType::class)
       ->add('published' ,CheckboxType::class)
+      ->add('image', ImageType::class )
       ->add('save',SubmitType::class )
       //->setAction("home/test")
     ;
