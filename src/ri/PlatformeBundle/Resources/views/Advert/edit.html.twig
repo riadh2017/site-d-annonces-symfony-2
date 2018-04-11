@@ -13,6 +13,9 @@
   <div class="well">
    {{ form_start(form,{'attr': {'class': 'form-horizontal'}}) }}
       <div class="form-group">
+
+  
+
       {# Génération du label. #}
       {{ form_label(form.title, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
@@ -55,8 +58,9 @@
   
 </div>
   
-  
-</div>
+
+{# Voici le script en question : #}
+
   <p>
     Vous éditez une annonce déjà existante, merci de ne pas changer
     l'esprit générale de l'annonce déjà publiée.
