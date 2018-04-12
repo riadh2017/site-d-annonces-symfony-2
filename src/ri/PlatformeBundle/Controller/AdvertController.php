@@ -17,6 +17,7 @@ use ri\PlatformeBundle\Entity\Category;
 use ri\PlatformeBundle\Entity\Application;
 use ri\PlatformeBundle\Entity\AdvertSkill;
 use ri\PlatformeBundle\Form\AdvertType;
+use ri\PlatformeBundle\Form\AdvertEditType;
 
 
 
@@ -94,30 +95,31 @@ public function indexAction($page)
   
     
 
-
-
-
-
   public function editAction($id, Request $request)
   {
-/*
+  
      $em = $this->getDoctrine()->getManager();
      $advert =$em->getRepository("riPlatformeBundle:Advert")->find($id);
-    $form=$this->createForm(AdvertType::class,$advert);
+     
 
-    return $this->render('riPlatformeBundle:Advert:edit.html.twig', array(
-      'form' => $form->createView(),
+    $form=$this->createForm(AdvertEditType::class,$advert);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->persist($advert->getImage());
+        $em->flush();
+
+        return $this->redirectToRoute('ri_platform_view', array('id' => $advert->getId()));
+    }
+
+ return $this->render('riPlatformeBundle:Advert:edit.html.twig' , array(
+    'form' => $form->createView(),
       'advert'=>$advert
     ));
-  */
-   
-  // public function deleteAction($id)
-  // {
-  //   // Ici, on récupérera l'annonce correspondant à $id
 
-  //   // Ici, on gérera la suppression de l'annonce en question
-
-  //   return $this->render('riPlatformeBundle:Advert:delete.html.twig');
+  
   }
 
 

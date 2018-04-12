@@ -10,67 +10,23 @@
 
   <h2>Modifier une annonce</h2>
 
-  <div class="well">
-   {{ form_start(form,{'attr': {'class': 'form-horizontal'}}) }}
-      <div class="form-group">
+{{ include("riPlatformeBundle:Advert:form.html.twig") }} 
 
-  
+<br>
+<div>
 
-      {# Génération du label. #}
-      {{ form_label(form.title, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
-      {# Affichage des erreurs pour ce champ précis. #}
-      {{ form_errors(form.title) }}
-
-      <div class="col-sm-4">
-        {# Génération de l'input. #}
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
-
-    {# Idem pour un autre champ. #}
-    <div class="form-group">
-      {{ form_label(form.content, "Contenu de l'annonce", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.content) }}
-
-      <div class="col-sm-4">
-        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
-
-  {# Génération du label + error + widget pour un champ #}
-
-
-  {{ form_row(form.author,{'label_attr': {'class': 'col-sm-3 control-label'}})}}
-  {{ form_row(form.published) }}
-
-  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-
-  {# Génération automatique des champs pas encore écrits.
-     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-     et tous les champs cachés (type « hidden »). #}
-  {{ form_rest(form) }}
-  
-  {# Fermeture de la balise <form> du formulaire HTML #}
-  {{ form_end(form) }}
-</div>
-  
-</div>
-  
-
-{# Voici le script en question : #}
-
-  <p>
+  <p><b>
     Vous éditez une annonce déjà existante, merci de ne pas changer
     l'esprit générale de l'annonce déjà publiée.
+  </b>
   </p>
-
+</div>
   <p>
     <a href="{{ path('ri_platform_view', {'id': advert.id}) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
       Retour à l'annonce
     </a>
   </p>
-
+</div>
+</div>
 {% endblock %}

@@ -34,9 +34,9 @@ $builder
       ->add('published' ,CheckboxType::class)
       ->add('image', ImageType::class )
       ->add('categories', EntityType::class, array(
-  'class'    => Category::class,
-  'choice_label'=> 'name',
-  'multiple' => false))
+               'class'        => Category::class,
+               'choice_label' => 'name',
+               'multiple'     => false))
 
       // pour permettre de saisir des category
      /* ->add('categories',CollectionType::class,array('entry_type'=>  CategoryType::class, 'allow_add'=>true,'allow_delete'=>true,'prototype' => true,'by_reference' => false ))*/
