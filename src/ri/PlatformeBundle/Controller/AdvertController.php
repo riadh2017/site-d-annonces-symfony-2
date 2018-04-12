@@ -100,7 +100,7 @@ public function indexAction($page)
 
   public function editAction($id, Request $request)
   {
-
+/*
      $em = $this->getDoctrine()->getManager();
      $advert =$em->getRepository("riPlatformeBundle:Advert")->find($id);
     $form=$this->createForm(AdvertType::class,$advert);
@@ -109,7 +109,7 @@ public function indexAction($page)
       'form' => $form->createView(),
       'advert'=>$advert
     ));
-  
+  */
    
   // public function deleteAction($id)
   // {
