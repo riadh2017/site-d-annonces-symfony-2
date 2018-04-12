@@ -4,12 +4,19 @@
 namespace ri\PlatformeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  */
 class Category
 {
+  /**
+   * @ORM\ManyToMany(targetEntity="ri\PlatformeBundle\Entity\Advert", mappedBy="Category")
+   *@ORM\JoinColumn(nullable=false)
+   */
+
+  private $advert;
  
   /**
    * @ORM\Column(name="id", type="integer")
@@ -40,5 +47,28 @@ class Category
     return $this->name;
   }
    
-    
+
+  /**
+     * Set advert
+     *
+     * @param \ri\PlatformeBundle\Entity\advert $advert
+     *
+     * @return category
+     */
+    public function setAdvert(Advert $advert)
+    {
+        $this->advert=$advert;
+        return $this;
+    }
+
+    /**
+     * Get advert
+     *
+       * @param \ri\PlatformeBundle\Entity\advert $advert
+     *
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
+    }
 }

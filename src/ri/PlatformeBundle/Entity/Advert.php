@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 
-
 /**
  * Application
  *
@@ -24,7 +23,7 @@ class Advert
      private $applications;
 
     /**
-    * @ORM\ManyToMany(targetEntity="ri\PlatformeBundle\Entity\Category",cascade={"persist"})
+    * @ORM\ManyToMany(targetEntity="ri\PlatformeBundle\Entity\Category",inversedBy="advert", cascade={"persist"})
     */
     private $categories;
 

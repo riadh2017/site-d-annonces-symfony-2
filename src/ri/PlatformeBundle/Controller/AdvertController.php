@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ri\PlatformeBundle\Entity\Advert;
 use ri\PlatformeBundle\Entity\Image;
+use ri\PlatformeBundle\Entity\Category;
 use ri\PlatformeBundle\Entity\Application;
 use ri\PlatformeBundle\Entity\AdvertSkill;
 use ri\PlatformeBundle\Form\AdvertType;
@@ -72,6 +73,7 @@ public function indexAction($page)
     // On crée un objet Advert
     $advert = new Advert();
     $advert->setDate(new \Datetime());
+  
     $form=$this->createForm(AdvertType::class,$advert);
 
   $form->handleRequest($request);
