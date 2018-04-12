@@ -37,7 +37,11 @@
 
 
   {{ form_row(form.author,{'label_attr': {'class': 'col-sm-3 control-label'}})}}
-  {{ form_row(form.published) }}
+
+  {% if form.published is  defined %}
+ {{ form_row(form.published) }}
+  {% endif %}
+ 
  
 
 </div>
